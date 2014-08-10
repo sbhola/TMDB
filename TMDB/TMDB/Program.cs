@@ -10,7 +10,8 @@ namespace TMDB
     {
         static void Main(string[] args)
         {
-            TMDBAPI.TmdbRequest();
+            string movieName = "The lord of the rings";
+            TMDBAPI.TmdbRequest(movieName);
 
         }
     }
