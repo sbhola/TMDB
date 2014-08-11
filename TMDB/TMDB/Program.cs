@@ -20,20 +20,29 @@ namespace TMDB
 
                 foreach (var dir in dirs)
                 {
-                    Console.WriteLine(dir.Substring(dir.LastIndexOf("\\")+1));
+
+                    if (dir.Substring(dir.LastIndexOf("\\") + 1) != "$RECYCLE.BIN")
+                    {
+                        //TMDBAPI.TmdbRequest(dir.Substring(dir.LastIndexOf("\\") + 1));
+                        Console.WriteLine(dir.Substring(dir.LastIndexOf("\\") + 1));
+                    }
+                    else
+                        Console.WriteLine(dir.Substring(dir.LastIndexOf("\\") + 1) + "\tNot sending a request to TMDB API for this fodler name");
                 }
-                Console.WriteLine("{0} Directories found",dirs.Count);
+                Console.WriteLine("{0} Directories found", dirs.Count);
             }
             catch (UnauthorizedAccessException UAEx)
-        {
-            Console.WriteLine(UAEx.Message);
-        }
-        catch (PathTooLongException PathEx)
-        {
-            Console.WriteLine(PathEx.Message);
-        }
-                
-
+            {
+                Console.WriteLine(UAEx.Message);
+            }
+            catch (PathTooLongException PathEx)
+            {
+                Console.WriteLine(PathEx.Message);
+            }
+            catch (DirectoryNotFoundException DNFEx)
+            {
+                Console.WriteLine(DNFEx.Message);
+            }
 
 
             ///Give a call to TMDB API
